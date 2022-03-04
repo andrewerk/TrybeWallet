@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { userName } from '../actions';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       user: '',
       password: '',
@@ -26,6 +29,14 @@ class Login extends React.Component {
     }
   }
 
+  clickButton = (event) => {
+    const { user } = this.state;
+    const { history, storeUser } = this.props;
+    event.preventDefault();
+    storeUser(user);
+    history.push('/carteira');
+  }
+
   render() {
     const { user, password, buttonEnabled } = this.state;
     return (
@@ -47,11 +58,26 @@ class Login extends React.Component {
             value={ password }
             onChange={ this.handleChange }
           />
-          <button type="submit" disabled={ !buttonEnabled }>Entrar</button>
+          <button
+            type="submit"
+            disabled={ !buttonEnabled }
+            onClick={ this.clickButton }
+          >
+            Entrar
+          </button>
         </label>
       </div>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  storeUser: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  storeUser: (user) => { dispatch(userName(user)); },
+});
+
+export default connect(null, mapDispatchToProps)(Login);

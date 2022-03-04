@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 function user(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'USER_INPUT':
-    return { ...state, ...action.payload };
+    return { ...state, email: action.email };
   default:
     return { ...state };
   }
