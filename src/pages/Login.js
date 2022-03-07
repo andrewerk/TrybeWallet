@@ -30,9 +30,9 @@ class Login extends React.Component {
   }
 
   clickButton = (event) => {
-    const { user } = this.state;
-    const { history, storeUser } = this.props;
     event.preventDefault();
+    const { history, storeUser } = this.props;
+    const { user } = this.state;
     storeUser(user);
     history.push('/carteira');
   }
@@ -51,7 +51,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
           <input
-            type="text"
+            type="password"
             name="password"
             data-testid="password-input"
             placeholder="Nome de Senha"
