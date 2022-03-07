@@ -54,7 +54,7 @@ class Login extends React.Component {
             type="password"
             name="password"
             data-testid="password-input"
-            placeholder="Nome de Senha"
+            placeholder="Senha"
             value={ password }
             onChange={ this.handleChange }
           />
