@@ -1,21 +1,36 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { fetchCurrencies, updateTotal } from '../../actions';
 
 class Form extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     user: '',
-  //     password: '',
-  //     buttonEnabled: false,
-  //   };
-  // }
+  constructor() {
+    super();
+    this.state = {
+      id: 0,
+      value: 0,
+      description: '',
+      currency: 'USD',
+      method: '',
+      tag: '',
+    };
+  }
 
-  // handleChange = ({ target }) => {
-  //   const { name } = target;
-  //   this.setState({ [name]: target.value }, this.enableButton);
-  // }
+  handleChange = ({ target }) => {
+    const { name } = target;
+    this.setState({ [name]: target.value });
+  }
+
+  totalSum = () => {
+    const { expenses, updateTotal } = this.props;
+    let total = 0;
+    expenses.forEach(({ value, exchangeRates, currency }) => {
+      const { ask } = exchangeRates[currency];
+      total += (Number(value) * Number(ask));
+    });
+    console.log(total);
+    updateTotal(total);
+  }
 
   // enableButton = () => {
   //   const minPass = 6;
@@ -28,43 +43,44 @@ class Form extends React.Component {
   //   }
   // }
 
-  // clickButton = (event) => {
-  //   event.preventDefault();
-  //   const { history, storeUser } = this.props;
-  //   const { user } = this.state;
-  //   storeUser(user);
-  //   history.push('/carteira');
-  // }
+  clickButton = async () => {
+    const { fetchCurrencies, expenses } = this.props;
+    await fetchCurrencies(this.state);
+    this.setState({ id: expenses.length });
+    this.updateTotal();
+  }
 
   render() {
-    // const { user, password, buttonEnabled } = this.state;
+    const { description, value, currency, method, tag } = this.state;
     return (
       <div>
         <label htmlFor="spend-info">
           <input
-            type="number"
+            type="text"
             name="value"
             data-testid="value-input"
             placeholder="Valor"
-            // value={ user }
-            // onChange={ this.handleChange }
+            value={ value }
+            onChange={ this.handleChange }
           />
           <input
             type="text"
             name="description"
             data-testid="description-input"
             placeholder="Descrição"
-            // value={ password }
-            // onChange={ this.handleChange }
+            value={ description }
+            onChange={ this.handleChange }
           />
           <label htmlFor="currency">
             Moeda
             <select
               name="currency"
               data-testid="currency-input"
+              onChange={ this.handleChange }
+              value={ currency }
             >
               <option>
-                BRL
+                USD
               </option>
             </select>
           </label>
@@ -73,6 +89,8 @@ class Form extends React.Component {
             <select
               name="method"
               data-testid="method-input"
+              onChange={ this.handleChange }
+              value={ method }
             >
               <option>
                 Cartão de Crédito
@@ -85,8 +103,10 @@ class Form extends React.Component {
           <label htmlFor="tag">
             Tipo
             <select
-              name="method"
+              name="tag"
               data-testid="tag-input"
+              onChange={ this.handleChange }
+              value={ tag }
             >
               <option>
                 Alimentação
@@ -105,19 +125,29 @@ class Form extends React.Component {
               </option>
             </select>
           </label>
+          <button
+            type="button"
+            onClick={ this.clickButton }
+          >
+            Adicionar despesa
+          </button>
         </label>
       </div>
     );
   }
 }
 
-// Login.propTypes = {
-//   storeUser: PropTypes.func.isRequired,
-//   history: PropTypes.objectOf(PropTypes.any).isRequired,
-// };
+Form.propTypes = {
+  fetchCurrencies: PropTypes.func.isRequired,
+  expenses: PropTypes.objectOf(PropTypes.any).isRequired,
+  updateTotal: PropTypes.func.isRequired,
+};
 
-// const mapDispatchToProps = (dispatch) => ({
-//   storeUser: (user) => { dispatch(userName(user)); },
-// });
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrencies: (expense) => { dispatch(fetchCurrencies(expense)); },
+  updateTotal: (total) => { dispatch(updateTotal(total)); },
+});
 
-export default connect(null, null)(Form);
+const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
