@@ -73,10 +73,12 @@ class Form extends React.Component {
               onChange={ this.handleChange }
               value={ currency }
             >
-              {currencies && currencies.map((currencyItem) => (
-                <option key={ currencyItem }>
-                  { currencyItem }
-                </option>))}
+              { currencies && currencies.filter((currencyItem) => currencyItem !== 'USDT')
+                .map((currencyItem) => (
+                // currencyItem !== 'USDT'
+                  <option key={ currencyItem }>
+                    { currencyItem }
+                  </option>))}
             </select>
           </label>
           <label htmlFor="method">
