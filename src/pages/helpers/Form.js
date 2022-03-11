@@ -16,19 +16,35 @@ class Form extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    const responseJson = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const response = await responseJson.json();
+    const currencies = Object.keys(response);
+    this.setState({ currencies });
+  }
+
   handleChange = ({ target }) => {
     const { name } = target;
     this.setState({ [name]: target.value });
   }
 
   clickButton = () => {
+    const {
+      id,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    } = this.state;
     const { fetchCurrenciesProp, expenses } = this.props;
-    this.setState({ id: expenses.length + 1 }, fetchCurrenciesProp(this.state));
+    this.setState({ id: expenses.length + 1 }, fetchCurrenciesProp({
+      id, value, description, currency, method, tag }));
     this.setState({ value: '' });
   }
 
   render() {
-    const { description, value, currency, method, tag } = this.state;
+    const { description, value, currency, method, tag, currencies } = this.state;
     return (
       <div>
         <label htmlFor="spend-info">
@@ -57,9 +73,10 @@ class Form extends React.Component {
               onChange={ this.handleChange }
               value={ currency }
             >
-              <option>
-                USD
-              </option>
+              {currencies && currencies.map((currencyItem) => (
+                <option key={ currencyItem }>
+                  { currencyItem }
+                </option>))}
             </select>
           </label>
           <label htmlFor="method">
