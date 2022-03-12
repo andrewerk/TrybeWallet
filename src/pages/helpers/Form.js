@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCurrencies } from '../../actions';
+import { fetchCurrencies, loadCurrencies } from '../../actions';
 
 class Form extends React.Component {
   constructor() {
@@ -17,10 +17,12 @@ class Form extends React.Component {
   }
 
   async componentDidMount() {
+    const { loadCurrenciesProp } = this.props;
     const responseJson = await fetch('https://economia.awesomeapi.com.br/json/all');
     const response = await responseJson.json();
     const currencies = Object.keys(response);
     this.setState({ currencies });
+    loadCurrenciesProp(currencies);
   }
 
   handleChange = ({ target }) => {
@@ -41,6 +43,7 @@ class Form extends React.Component {
     this.setState({ id: expenses.length + 1 }, fetchCurrenciesProp({
       id, value, description, currency, method, tag }));
     this.setState({ value: '' });
+    console.log(this.state);
   }
 
   render() {
@@ -141,11 +144,13 @@ class Form extends React.Component {
 
 Form.propTypes = {
   fetchCurrenciesProp: PropTypes.func.isRequired,
-  expenses: PropTypes.objectOf(PropTypes.any).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
+  loadCurrenciesProp: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrenciesProp: (expense) => { dispatch(fetchCurrencies(expense)); },
+  loadCurrenciesProp: (currencies) => { dispatch(loadCurrencies(currencies)); },
 });
 
 const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
