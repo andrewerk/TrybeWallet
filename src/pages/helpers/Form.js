@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchCurrencies, loadCurrencies } from '../../actions';
+import {
+  fetchCurrencies,
+  loadCurrencies,
+  editExpenseFinished,
+  expenseFormating } from '../../actions';
 
 class Form extends React.Component {
   constructor() {
@@ -13,6 +17,7 @@ class Form extends React.Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
+      currencies: false,
     };
   }
 
@@ -43,10 +48,20 @@ class Form extends React.Component {
     this.setState({ id: expenses.length + 1 }, fetchCurrenciesProp({
       id, value, description, currency, method, tag }));
     this.setState({ value: '' });
-    console.log(this.state);
   }
 
   render() {
+    const { editExpenseFinishedProp, edit, expenses } = this.props;
+    if (edit || edit === 0) {
+      this.setState({
+        id: expenses[edit].id,
+        value: expenses[edit].value,
+        description: expenses[edit].description,
+        currency: expenses[edit].currency,
+        method: expenses[edit].method,
+        tag: expenses[edit].tag,
+      });
+    }
     const { description, value, currency, method, tag, currencies } = this.state;
     return (
       <div>
@@ -56,7 +71,7 @@ class Form extends React.Component {
             name="value"
             data-testid="value-input"
             placeholder="Valor"
-            value={ value }
+            value={ edit || edit === 0 ? expenses[edit].value : value }
             onChange={ this.handleChange }
           />
           <input
@@ -64,7 +79,7 @@ class Form extends React.Component {
             name="description"
             data-testid="description-input"
             placeholder="Descrição"
-            value={ description }
+            value={ edit || edit === 0 ? expenses[edit].description : description }
             onChange={ this.handleChange }
           />
           <label htmlFor="currency">
@@ -74,7 +89,7 @@ class Form extends React.Component {
               id="currency"
               data-testid="currency-input"
               onChange={ this.handleChange }
-              value={ currency }
+              // value={ edit || edit === 0 ? expenses[edit].currency : currency }
             >
               { currencies && currencies.filter((currencyItem) => currencyItem !== 'USDT')
                 .map((currencyItem) => (
@@ -91,7 +106,7 @@ class Form extends React.Component {
               id="method"
               data-testid="method-input"
               onChange={ this.handleChange }
-              value={ method }
+              value={ edit || edit === 0 ? expenses[edit].method : method }
             >
               <option>
                 Dinheiro
@@ -111,7 +126,7 @@ class Form extends React.Component {
               id="tag"
               data-testid="tag-input"
               onChange={ this.handleChange }
-              value={ tag }
+              value={ edit || edit === 0 ? expenses[edit].tag : tag }
             >
               <option>
                 Alimentação
@@ -132,7 +147,14 @@ class Form extends React.Component {
           </label>
           <button
             type="button"
-            onClick={ this.clickButton }
+            onClick={ edit || edit === 0
+              ? () => editExpenseFinishedProp(expenseFormating(currencies, {
+                value,
+                description,
+                currency,
+                method,
+                tag,
+              })) : this.clickButton }
           >
             Adicionar despesa
           </button>
@@ -146,13 +168,20 @@ Form.propTypes = {
   fetchCurrenciesProp: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
   loadCurrenciesProp: PropTypes.func.isRequired,
+  editExpenseFinishedProp: PropTypes.func.isRequired,
+  edit: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+  ]).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrenciesProp: (expense) => { dispatch(fetchCurrencies(expense)); },
   loadCurrenciesProp: (currencies) => { dispatch(loadCurrencies(currencies)); },
+  editExpenseFinishedProp: (expense) => { dispatch(editExpenseFinished(expense)); },
 });
 
-const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
+const mapStateToProps = (state) => ({
+  expenses: state.wallet.expenses, edit: state.wallet.edit });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
