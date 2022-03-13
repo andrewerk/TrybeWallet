@@ -57,17 +57,17 @@ class Table extends React.Component {
               <td>
                 <button
                   type="button"
-                  onClick={ () => this.handleDeleting(expense.id) }
-                  data-testid="delete-btn"
-                >
-                  Excluir
-                </button>
-                <button
-                  type="button"
                   onClick={ () => editExpenseProp(expense.id) }
                   data-testid="edit-btn"
                 >
                   Editar
+                </button>
+                <button
+                  type="button"
+                  onClick={ () => this.handleDeleting(expense.id) }
+                  data-testid="delete-btn"
+                >
+                  Excluir
                 </button>
               </td>
             </tr>

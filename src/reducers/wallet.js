@@ -32,7 +32,9 @@ function wallet(state = INITIAL_STATE, action) {
     return {
       ...state,
       expenses: state.expenses.map((expense) => (expense.id === state.edit
-        ? { ...action.payload, exchangeRates: expense.exchangeRates } : expense)),
+        ? {
+          id: expense.id, ...action.payload, exchangeRates: expense.exchangeRates,
+        } : expense)),
       edit: false };
   default:
     return { ...state };
