@@ -148,15 +148,6 @@ Form.propTypes = {
   fetchCurrenciesProp: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
   loadCurrenciesProp: PropTypes.func.isRequired,
-  editExpenseFinishedProp: PropTypes.func.isRequired,
-  edit: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.number,
-  ]),
-};
-
-Form.defaultProps = {
-  edit: undefined,
 };
 
 const mapDispatchToProps = (dispatch) => ({
