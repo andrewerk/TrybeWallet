@@ -1,20 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import '../../index.css';
 
 class Header extends React.Component {
   render() {
     const { user, expenses } = this.props;
     return (
-      <header>
+      <header className="header">
         <h3 data-testid="email-field">{ user }</h3>
         <h3 data-testid="total-field">
+          Total:
+          { ' ' }
           {
             expenses.reduce((acc, { value, exchangeRates, currency }) => {
               const { ask } = exchangeRates[currency];
               acc += (Number(value) * Number(ask));
               return acc;
-            }, 0)
+            }, 0).toFixed(2)
           }
 
         </h3>

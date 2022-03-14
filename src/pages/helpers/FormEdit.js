@@ -35,7 +35,7 @@ class FormEdit extends React.Component {
     const { description, value, currency, method, tag } = this.state;
     const { editExpenseFinishedProp, currencies } = this.props;
     return (
-      <div>
+      <form className="input-form-edit">
         <label htmlFor="spend-info">
           <input
             type="text"
@@ -44,6 +44,7 @@ class FormEdit extends React.Component {
             placeholder="Valor"
             value={ value }
             onChange={ this.handleChange }
+            className="form-item"
           />
           <input
             type="text"
@@ -52,8 +53,9 @@ class FormEdit extends React.Component {
             placeholder="Descrição"
             value={ description }
             onChange={ this.handleChange }
+            className="form-item"
           />
-          <label htmlFor="currency">
+          <label htmlFor="currency" className="form-item">
             Moeda
             <select
               name="currency"
@@ -61,6 +63,7 @@ class FormEdit extends React.Component {
               data-testid="currency-input"
               onChange={ this.handleChange }
               value={ currency }
+              className="form-item-select"
             >
               { currencies && currencies.filter((currencyItem) => currencyItem !== 'USDT')
                 .map((currencyItem) => (
@@ -70,7 +73,7 @@ class FormEdit extends React.Component {
                   </option>))}
             </select>
           </label>
-          <label htmlFor="method">
+          <label htmlFor="method" className="form-item">
             Metodo de pagamento
             <select
               name="method"
@@ -78,6 +81,7 @@ class FormEdit extends React.Component {
               data-testid="method-input"
               onChange={ this.handleChange }
               value={ method }
+              className="form-item-select"
             >
               <option>
                 Dinheiro
@@ -90,7 +94,7 @@ class FormEdit extends React.Component {
               </option>
             </select>
           </label>
-          <label htmlFor="tag">
+          <label htmlFor="tag" className="form-item">
             Tipo
             <select
               name="tag"
@@ -98,6 +102,7 @@ class FormEdit extends React.Component {
               data-testid="tag-input"
               onChange={ this.handleChange }
               value={ tag }
+              className="form-item-select"
             >
               <option>
                 Alimentação
@@ -118,6 +123,7 @@ class FormEdit extends React.Component {
           </label>
           <button
             type="button"
+            className="form-item"
             onClick={ () => editExpenseFinishedProp({
               value,
               description,
@@ -129,7 +135,7 @@ class FormEdit extends React.Component {
             Editar despesa
           </button>
         </label>
-      </div>
+      </form>
     );
   }
 }

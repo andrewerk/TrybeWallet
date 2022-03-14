@@ -5,9 +5,88 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #EFF3CD;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #248f8d;
+  color: #eff3cd;
+}
+
+.input-form {
+  display: flex;
+  justify-content: space-around;
+  background-color: #B2D5BA;
+  padding: 10px;
+}
+
+.form-item {
+  margin: 10px;
+}
+
+.form-item-select {
+  margin: 5px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.colum-header {
+  margin: 10px;
+  padding: 5px 15px;
+}
+
+.colum-cell {
+  margin: 10px;
+  padding: 5px 30px;
+}
+
+.input-form-edit {
+  display: flex;
+  justify-content: space-around;
+  background-color: #605063;
+  padding: 10px;
+  color: bisque;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height:500px;
+}
+
+.login-input {
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+.login-button {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px
+}
+
+.login-button:hover {
+  background-color: #248f8d;
+  color: bisque
+}
+
+.logo {
+  width: 200px;
+}
+
+.wallet-logo {
+  width: 100px;
 }

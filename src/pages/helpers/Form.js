@@ -52,7 +52,7 @@ class Form extends React.Component {
   render() {
     const { description, value, currency, method, tag, currencies } = this.state;
     return (
-      <div>
+      <form className="input-form">
         <label htmlFor="spend-info">
           <input
             type="text"
@@ -61,6 +61,7 @@ class Form extends React.Component {
             placeholder="Valor"
             value={ value }
             onChange={ this.handleChange }
+            className="form-item"
           />
           <input
             type="text"
@@ -69,8 +70,9 @@ class Form extends React.Component {
             placeholder="Descrição"
             value={ description }
             onChange={ this.handleChange }
+            className="form-item"
           />
-          <label htmlFor="currency">
+          <label htmlFor="currency" className="form-item">
             Moeda
             <select
               name="currency"
@@ -78,6 +80,7 @@ class Form extends React.Component {
               data-testid="currency-input"
               onChange={ this.handleChange }
               value={ currency }
+              className="form-item-select"
             >
               { currencies && currencies.filter((currencyItem) => currencyItem !== 'USDT')
                 .map((currencyItem) => (
@@ -86,7 +89,7 @@ class Form extends React.Component {
                   </option>))}
             </select>
           </label>
-          <label htmlFor="method">
+          <label htmlFor="method" className="form-item">
             Metodo de pagamento
             <select
               name="method"
@@ -94,6 +97,7 @@ class Form extends React.Component {
               data-testid="method-input"
               onChange={ this.handleChange }
               value={ method }
+              className="form-item-select"
             >
               <option>
                 Dinheiro
@@ -106,7 +110,7 @@ class Form extends React.Component {
               </option>
             </select>
           </label>
-          <label htmlFor="tag">
+          <label htmlFor="tag" className="form-item">
             Tipo
             <select
               name="tag"
@@ -114,6 +118,7 @@ class Form extends React.Component {
               data-testid="tag-input"
               onChange={ this.handleChange }
               value={ tag }
+              className="form-item-select"
             >
               <option>
                 Alimentação
@@ -135,11 +140,12 @@ class Form extends React.Component {
           <button
             type="button"
             onClick={ this.clickButton }
+            className="form-item"
           >
             Adicionar despesa
           </button>
         </label>
-      </div>
+      </form>
     );
   }
 }

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userName } from '../actions';
+import logo from '../trybe-logo.png';
+import wallet from '../wallet.png';
 
 class Login extends React.Component {
   constructor() {
@@ -40,8 +42,19 @@ class Login extends React.Component {
   render() {
     const { user, password, buttonEnabled } = this.state;
     return (
-      <div>
-        <label htmlFor="login">
+      <form>
+        <label htmlFor="login" className="login">
+          <img
+            src={ logo }
+            alt="trybe-logo"
+            className="logo"
+          />
+          <img
+            src={ wallet }
+            alt="wallet"
+            className="wallet-logo"
+          />
+          Para utilizar o serviço, faça o login com seu endereço de email válido e senha
           <input
             type="email"
             name="user"
@@ -49,6 +62,7 @@ class Login extends React.Component {
             placeholder="Nome de Usuário"
             value={ user }
             onChange={ this.handleChange }
+            className="login-input"
           />
           <input
             type="password"
@@ -57,16 +71,18 @@ class Login extends React.Component {
             placeholder="Senha"
             value={ password }
             onChange={ this.handleChange }
+            className="login-input"
           />
           <button
             type="submit"
             disabled={ !buttonEnabled }
             onClick={ this.clickButton }
+            className="login-button"
           >
             Entrar
           </button>
         </label>
-      </div>
+      </form>
     );
   }
 }

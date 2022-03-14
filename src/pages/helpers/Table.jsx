@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteExpense, editExpense } from '../../actions';
+import '../../index.css';
 
 class Table extends React.Component {
   handleDeleting = (id) => {
@@ -11,54 +12,55 @@ class Table extends React.Component {
   }
 
   render() {
-    const { expenses, editExpenseProp } = this.props;
+    const { expenses, editExpenseProp, edit } = this.props;
     return (
-      <table>
+      <table className="table">
         <thead>
           <tr>
-            <th role="columnheader">Descrição</th>
-            <th role="columnheader">Tag</th>
-            <th role="columnheader">Método de pagamento</th>
-            <th role="columnheader">Valor</th>
-            <th role="columnheader">Moeda</th>
-            <th role="columnheader">Câmbio utilizado</th>
-            <th role="columnheader">Valor convertido</th>
-            <th role="columnheader">Moeda de conversão</th>
-            <th role="columnheader">Editar/Excluir</th>
+            <th role="columnheader" className="colum-header">Descrição</th>
+            <th role="columnheader" className="colum-header">Tag</th>
+            <th role="columnheader" className="colum-header">Método de pagamento</th>
+            <th role="columnheader" className="colum-header">Valor</th>
+            <th role="columnheader" className="colum-header">Moeda</th>
+            <th role="columnheader" className="colum-header">Câmbio utilizado</th>
+            <th role="columnheader" className="colum-header">Valor convertido</th>
+            <th role="columnheader" className="colum-header">Moeda de conversão</th>
+            <th role="columnheader" className="colum-header">Editar/Excluir</th>
           </tr>
         </thead>
         <tbody>
           { expenses && expenses.map((expense) => (
             <tr key={ expense.id }>
-              <td role="cell">
+              <td role="cell" className="colum-cell">
                 { expense.description }
               </td>
-              <td role="cell">
+              <td role="cell" className="colum-cell">
                 { expense.tag }
               </td>
-              <td role="cell">
+              <td role="cell" className="colum-cell">
                 { expense.method }
               </td>
-              <td role="cell">
+              <td role="cell" className="colum-cell">
                 { parseFloat(expense.value).toFixed(2) }
               </td>
-              <td role="cell">
+              <td role="cell" className="colum-cell">
                 { expense.exchangeRates[expense.currency].name }
               </td>
-              <td role="cell">
+              <td role="cell" className="colum-cell">
                 { parseFloat(expense.exchangeRates[expense.currency].ask)
                   .toFixed(2) }
               </td>
-              <td role="cell">
+              <td role="cell" className="colum-cell">
                 { parseFloat(expense.exchangeRates[expense.currency].ask * expense.value)
                   .toFixed(2) }
               </td>
-              <td role="cell">Real</td>
+              <td role="cell" className="colum-cell">Real</td>
               <td>
                 <button
                   type="button"
                   onClick={ () => editExpenseProp(expense.id) }
                   data-testid="edit-btn"
+                  disabled={ edit || edit === 0 }
                 >
                   Editar
                 </button>
@@ -82,6 +84,14 @@ Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
   deleteExpenseProp: PropTypes.func.isRequired,
   editExpenseProp: PropTypes.func.isRequired,
+  edit: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
+};
+
+Table.defaultProps = {
+  edit: undefined,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -90,6 +100,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
+const mapStateToProps = (state) => ({
+  expenses: state.wallet.expenses, edit: state.wallet.edit });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
