@@ -3,7 +3,8 @@ import {
   DELETE_EXPENSE,
   LOAD_CURRENCIES,
   EDIT_EXPENSE,
-  EDIT_EXPENSE_FINISHED } from '../actions';
+  EDIT_EXPENSE_FINISHED,
+  LOCAL_STORAGE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -36,6 +37,10 @@ function wallet(state = INITIAL_STATE, action) {
           id: expense.id, ...action.payload, exchangeRates: expense.exchangeRates,
         } : expense)),
       edit: false };
+  case LOCAL_STORAGE_EXPENSE:
+    return {
+      ...state,
+      expenses: [...action.payload] };
   default:
     return { ...state };
   }

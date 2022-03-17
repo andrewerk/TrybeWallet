@@ -16,14 +16,14 @@ code {
 .header {
   display: flex;
   justify-content: space-evenly;
-  background-color: #248f8d;
-  color: #eff3cd;
+  background-color: #EFF3CD;
+  color: #248f8d;
 }
 
 .input-form {
   display: flex;
   justify-content: space-around;
-  background-color: #B2D5BA;
+  background-color: #248f8d;
   padding: 10px;
 }
 

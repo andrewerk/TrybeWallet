@@ -4,6 +4,7 @@ export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const LOAD_CURRENCIES = 'LOAD_CURRENCIES';
 export const EDIT_EXPENSE_FINISHED = 'EDIT_EXPENSE_FINISHED';
 export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+export const LOCAL_STORAGE_EXPENSE = 'LOCAL_STORAGE_EXPENSE';
 
 export const userName = (user) => ({ type: USER_NAME, email: user });
 
@@ -31,3 +32,6 @@ export function fetchCurrencies(expense) {
 export const editExpense = (id) => ({ type: EDIT_EXPENSE, payload: id });
 export const editExpenseFinished = (expense) => ({ type: EDIT_EXPENSE_FINISHED,
   payload: expense });
+
+export const storageExpenses = (expenses) => ({
+  type: LOCAL_STORAGE_EXPENSE, payload: expenses });

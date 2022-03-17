@@ -5,6 +5,11 @@ import { deleteExpense, editExpense } from '../../actions';
 import '../../index.css';
 
 class Table extends React.Component {
+  componentDidUpdate() {
+    const { user, expenses } = this.props;
+    localStorage.setItem(user, JSON.stringify(expenses));
+  }
+
   handleDeleting = (id) => {
     const { expenses, deleteExpenseProp } = this.props;
     const expensesUpdated = expenses.filter((expense) => expense.id !== id);
@@ -88,6 +93,7 @@ Table.propTypes = {
     PropTypes.bool,
     PropTypes.number,
   ]),
+  user: PropTypes.string.isRequired,
 };
 
 Table.defaultProps = {
@@ -97,10 +103,9 @@ Table.defaultProps = {
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenseProp: (id) => { dispatch(deleteExpense(id)); },
   editExpenseProp: (id) => { dispatch(editExpense(id)); },
-
 });
 
 const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses, edit: state.wallet.edit });
+  expenses: state.wallet.expenses, edit: state.wallet.edit, user: state.user.email });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
