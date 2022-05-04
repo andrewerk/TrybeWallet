@@ -21,15 +21,15 @@ class Table extends React.Component {
     return (
       <table className="table">
         <tr>
-          <th role="columnheader" className="colum-header">Descrição</th>
+          <th role="columnheader" className="colum-header">Description</th>
           <th role="columnheader" className="colum-header">Tag</th>
-          <th role="columnheader" className="colum-header">Método de pagamento</th>
-          <th role="columnheader" className="colum-header">Valor</th>
-          <th role="columnheader" className="colum-header">Moeda</th>
-          <th role="columnheader" className="colum-header">Câmbio utilizado</th>
-          <th role="columnheader" className="colum-header">Valor convertido</th>
-          <th role="columnheader" className="colum-header">Moeda de conversão</th>
-          <th role="columnheader" className="colum-header">Editar/Excluir</th>
+          <th role="columnheader" className="colum-header">Payment Method</th>
+          <th role="columnheader" className="colum-header">Value</th>
+          <th role="columnheader" className="colum-header">Currency</th>
+          <th role="columnheader" className="colum-header">Currency value</th>
+          <th role="columnheader" className="colum-header">Expense Total</th>
+          <th role="columnheader" className="colum-header">Base currency</th>
+          <th role="columnheader" className="colum-header">Edit/Delete</th>
         </tr>
         { expenses && expenses.map((expense) => (
           <tr key={ expense.id }>
@@ -64,14 +64,14 @@ class Table extends React.Component {
                 data-testid="edit-btn"
                 disabled={ edit || edit === 0 }
               >
-                Editar
+                Edit
               </button>
               <button
                 type="button"
                 onClick={ () => this.handleDeleting(expense.id) }
                 data-testid="delete-btn"
               >
-                Excluir
+                Delete
               </button>
             </td>
           </tr>

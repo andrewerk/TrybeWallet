@@ -54,12 +54,12 @@ class Login extends React.Component {
             alt="wallet"
             className="wallet-logo"
           />
-          To start, enter your email and password
+          To start, enter an email and password (min. 6 characters)
           <input
             type="email"
             name="user"
             data-testid="email-input"
-            placeholder="Nome de Usuário"
+            placeholder="Username"
             value={ user }
             onChange={ this.handleChange }
             className="login-input"
@@ -68,7 +68,7 @@ class Login extends React.Component {
             type="password"
             name="password"
             data-testid="password-input"
-            placeholder="Senha"
+            placeholder="Password"
             value={ password }
             onChange={ this.handleChange }
             className="login-input"

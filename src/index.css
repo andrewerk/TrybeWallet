@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #EFF3CD;
+  background-color: #f8f5f2;
 }
 
 code {
@@ -16,14 +16,14 @@ code {
 .header {
   display: flex;
   justify-content: space-evenly;
-  background-color: #EFF3CD;
-  color: #248f8d;
+  background-color: #f8f5f2;
+  color: #222525;
 }
 
 .input-form {
   display: flex;
   justify-content: space-around;
-  background-color: #248f8d;
+  background-color: #078080;
   padding: 10px;
 }
 
@@ -54,9 +54,9 @@ code {
 .input-form-edit {
   display: flex;
   justify-content: space-around;
-  background-color: #605063;
+  background-color: #f45d48;
   padding: 10px;
-  color: bisque;
+  color: #f8f5f2;
 }
 
 .login {
@@ -67,6 +67,28 @@ code {
   height:500px;
 }
 
+.form-button {
+  border-radius: 5px;
+  background-color: #f8f5f2;
+  color: #232323;
+}
+
+.form-button:hover {
+  background-color: #f45d48;
+  color: #f8f5f2;
+}
+
+.edit-button {
+  border-radius: 5px;
+  background-color: #f8f5f2;
+  color: #232323;
+}
+
+.edit-button:hover {
+  background-color: #078080;
+  color: #f8f5f2;
+}
+
 .login-input {
   padding: 10px;
   margin-top: 20px;
@@ -75,12 +97,19 @@ code {
 .login-button {
   padding: 10px;
   margin: 10px;
-  border-radius: 10px
+  border-radius: 10px;
+  background-color: #078080;
+  color: #f8f5f2;
+}
+
+.login-button:disabled {
+  background-color: #f8f5f2;
+  color: #232323;
 }
 
 .login-button:hover {
-  background-color: #248f8d;
-  color: bisque
+  background-color: #f45d48;
+  color: #f8f5f2
 }
 
 .logo {

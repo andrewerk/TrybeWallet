@@ -58,7 +58,7 @@ class Form extends React.Component {
             type="text"
             name="value"
             data-testid="value-input"
-            placeholder="Valor"
+            placeholder="Value"
             value={ value }
             onChange={ this.handleChange }
             className="form-item"
@@ -67,13 +67,13 @@ class Form extends React.Component {
             type="text"
             name="description"
             data-testid="description-input"
-            placeholder="Descrição"
+            placeholder="Description"
             value={ description }
             onChange={ this.handleChange }
             className="form-item"
           />
           <label htmlFor="currency" className="form-item">
-            Moeda
+            Currency
             <select
               name="currency"
               id="currency"
@@ -90,7 +90,7 @@ class Form extends React.Component {
             </select>
           </label>
           <label htmlFor="method" className="form-item">
-            Metodo de pagamento
+            Payment Method
             <select
               name="method"
               id="method"
@@ -100,18 +100,18 @@ class Form extends React.Component {
               className="form-item-select"
             >
               <option>
-                Dinheiro
+                Cash
               </option>
               <option>
-                Cartão de crédito
+                Credit Card
               </option>
               <option>
-                Cartão de débito
+                Debit Card
               </option>
             </select>
           </label>
           <label htmlFor="tag" className="form-item">
-            Tipo
+            Type
             <select
               name="tag"
               id="tag"
@@ -121,28 +121,28 @@ class Form extends React.Component {
               className="form-item-select"
             >
               <option>
-                Alimentação
+                Food
               </option>
               <option>
-                Lazer
+                Leisure
               </option>
               <option>
-                Trabalho
+                Work
               </option>
               <option>
-                Transporte
+                Transport
               </option>
               <option>
-                Saúde
+                Health
               </option>
             </select>
           </label>
           <button
             type="button"
             onClick={ this.clickButton }
-            className="form-item"
+            className="form-button"
           >
-            Adicionar despesa
+            Add Expense
           </button>
         </label>
       </form>
