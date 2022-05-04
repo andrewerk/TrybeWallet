@@ -1,25 +1,21 @@
+#Application
 
+This project was developed during my studies at trybe, on the frontend module. The purpose of the application is to build a portfolio of expenses, which can be added in several different currencies, obtained by an API. Added expenses can be deleted and edited, process in which it is possible to assign a new properties to the expense to be edited.
 
-# Habilidades
+The application shows the total spend, which automatically updates as a new spend is added, updated or removed.
 
-Neste projeto, verificamos se voce é capaz de:
+#Trained Skills
 
-- Criar um store Redux em aplicações React
+This project aims to train the following skills:
 
-- Criar reducers no Redux em aplicações React
+- Create a Redux store in React applications
 
-- Criar actions no Redux em aplicações React
+- Create reducers in Redux in React applications
 
-- Criar dispatchers no Redux em aplicações React
+- Create Redux actions in React applications
 
-- Conectar Redux aos componentes React
+- Create Redux dispatchers in React applications
 
-- Criar actions assíncronas na sua aplicação React que faz uso de Redux.
+- Connect Redux to React components
 
----
-
-## O que foi desenvolvido
-
-- Adicionar, remover e editar um gasto;
-- Visualizar uma tabelas com seus gastos;
-- Visualizar o total de gastos convertidos para uma moeda de escolha;
+- Create asynchronous actions in your React application that makes use of Redux.
