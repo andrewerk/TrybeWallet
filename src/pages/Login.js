@@ -54,7 +54,7 @@ class Login extends React.Component {
             alt="wallet"
             className="wallet-logo"
           />
-          To start, enter an email and password (min. 6 characters)
+          To enter Currencies Wallet, enter an email and password (min. 6 characters)
           <input
             type="email"
             name="user"

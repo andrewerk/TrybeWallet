@@ -8,6 +8,7 @@ class Header extends React.Component {
     const { user, expenses } = this.props;
     return (
       <header className="header">
+        <h3>Currencies Wallet</h3>
         <h3 data-testid="email-field">{ user }</h3>
         <h3 data-testid="total-field">
           Total:
