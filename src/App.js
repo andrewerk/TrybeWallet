@@ -9,13 +9,13 @@ function App() {
       <Switch>
         <Route
           exact
-          path="/"
+          path="trybewallet/"
           render={ (props) => (
             <Login { ...props } />
           ) }
         />
         <Route
-          path="/carteira"
+          path="trybewallet/carteira"
           component={ Wallet }
         />
       </Switch>
