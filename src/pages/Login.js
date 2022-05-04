@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userName } from '../actions';
-import logo from '../trybe-logo.png';
+import currencies from '../currencies-svgrepo-com.svg';
 import wallet from '../wallet.png';
 
 class Login extends React.Component {
@@ -45,8 +45,8 @@ class Login extends React.Component {
       <form>
         <label htmlFor="login" className="login">
           <img
-            src={ logo }
-            alt="trybe-logo"
+            src={ currencies }
+            alt="currencies-logo"
             className="logo"
           />
           <img
@@ -54,7 +54,7 @@ class Login extends React.Component {
             alt="wallet"
             className="wallet-logo"
           />
-          Para utilizar o serviço, faça o login com seu endereço de email válido e senha
+          To start, enter your email and password
           <input
             type="email"
             name="user"

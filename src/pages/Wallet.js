@@ -22,7 +22,8 @@ class Wallet extends React.Component {
     return (
       <div>
         <Header />
-        { edit || edit === 0 ? <FormEdit /> : <Form /> }
+        { edit || edit === 0
+          ? <FormEdit /> : <Form /> }
         <Table />
       </div>);
   }

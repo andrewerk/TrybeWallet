@@ -20,66 +20,62 @@ class Table extends React.Component {
     const { expenses, editExpenseProp, edit } = this.props;
     return (
       <table className="table">
-        <thead>
-          <tr>
-            <th role="columnheader" className="colum-header">Descrição</th>
-            <th role="columnheader" className="colum-header">Tag</th>
-            <th role="columnheader" className="colum-header">Método de pagamento</th>
-            <th role="columnheader" className="colum-header">Valor</th>
-            <th role="columnheader" className="colum-header">Moeda</th>
-            <th role="columnheader" className="colum-header">Câmbio utilizado</th>
-            <th role="columnheader" className="colum-header">Valor convertido</th>
-            <th role="columnheader" className="colum-header">Moeda de conversão</th>
-            <th role="columnheader" className="colum-header">Editar/Excluir</th>
+        <tr>
+          <th role="columnheader" className="colum-header">Descrição</th>
+          <th role="columnheader" className="colum-header">Tag</th>
+          <th role="columnheader" className="colum-header">Método de pagamento</th>
+          <th role="columnheader" className="colum-header">Valor</th>
+          <th role="columnheader" className="colum-header">Moeda</th>
+          <th role="columnheader" className="colum-header">Câmbio utilizado</th>
+          <th role="columnheader" className="colum-header">Valor convertido</th>
+          <th role="columnheader" className="colum-header">Moeda de conversão</th>
+          <th role="columnheader" className="colum-header">Editar/Excluir</th>
+        </tr>
+        { expenses && expenses.map((expense) => (
+          <tr key={ expense.id }>
+            <td role="cell" className="colum-cell">
+              { expense.description }
+            </td>
+            <td role="cell" className="colum-cell">
+              { expense.tag }
+            </td>
+            <td role="cell" className="colum-cell">
+              { expense.method }
+            </td>
+            <td role="cell" className="colum-cell">
+              { parseFloat(expense.value).toFixed(2) }
+            </td>
+            <td role="cell" className="colum-cell">
+              { expense.exchangeRates[expense.currency].name }
+            </td>
+            <td role="cell" className="colum-cell">
+              { parseFloat(expense.exchangeRates[expense.currency].ask)
+                .toFixed(2) }
+            </td>
+            <td role="cell" className="colum-cell">
+              { parseFloat(expense.exchangeRates[expense.currency].ask * expense.value)
+                .toFixed(2) }
+            </td>
+            <td role="cell" className="colum-cell">Real</td>
+            <td>
+              <button
+                type="button"
+                onClick={ () => editExpenseProp(expense.id) }
+                data-testid="edit-btn"
+                disabled={ edit || edit === 0 }
+              >
+                Editar
+              </button>
+              <button
+                type="button"
+                onClick={ () => this.handleDeleting(expense.id) }
+                data-testid="delete-btn"
+              >
+                Excluir
+              </button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          { expenses && expenses.map((expense) => (
-            <tr key={ expense.id }>
-              <td role="cell" className="colum-cell">
-                { expense.description }
-              </td>
-              <td role="cell" className="colum-cell">
-                { expense.tag }
-              </td>
-              <td role="cell" className="colum-cell">
-                { expense.method }
-              </td>
-              <td role="cell" className="colum-cell">
-                { parseFloat(expense.value).toFixed(2) }
-              </td>
-              <td role="cell" className="colum-cell">
-                { expense.exchangeRates[expense.currency].name }
-              </td>
-              <td role="cell" className="colum-cell">
-                { parseFloat(expense.exchangeRates[expense.currency].ask)
-                  .toFixed(2) }
-              </td>
-              <td role="cell" className="colum-cell">
-                { parseFloat(expense.exchangeRates[expense.currency].ask * expense.value)
-                  .toFixed(2) }
-              </td>
-              <td role="cell" className="colum-cell">Real</td>
-              <td>
-                <button
-                  type="button"
-                  onClick={ () => editExpenseProp(expense.id) }
-                  data-testid="edit-btn"
-                  disabled={ edit || edit === 0 }
-                >
-                  Editar
-                </button>
-                <button
-                  type="button"
-                  onClick={ () => this.handleDeleting(expense.id) }
-                  data-testid="delete-btn"
-                >
-                  Excluir
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        ))}
       </table>
     );
   }
